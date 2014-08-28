@@ -1,6 +1,7 @@
 package com.deswaef.twitch.work;
 
 import com.deswaef.twitch.domain.TwitchChannel;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
@@ -17,7 +18,7 @@ public class ChannelChecker {
     private String baseUrl;
 
     public Optional<TwitchChannel> channel(String channelName) {
-
+        Assert.notNull(baseUrl, "base url for twitch must be set");
         try {
             RestTemplate template = new RestTemplate();
             return Optional.ofNullable(template.getForObject(String.format("%s/channels/%s", baseUrl, channelName.toLowerCase()), TwitchChannel.class));
