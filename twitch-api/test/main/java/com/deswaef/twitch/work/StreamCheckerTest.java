@@ -1,9 +1,9 @@
-package com.qkyrie.twitch.work;
+package com.deswaef.twitch.work;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.qkyrie.twitch.util.TwitchTestHelper.assertThrows;
+import static com.deswaef.twitch.util.TwitchTestHelper.assertThrows;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class StreamCheckerTest {

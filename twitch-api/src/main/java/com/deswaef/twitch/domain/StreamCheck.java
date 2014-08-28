@@ -1,4 +1,4 @@
-package com.qkyrie.twitch.domain;
+package com.deswaef.twitch.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

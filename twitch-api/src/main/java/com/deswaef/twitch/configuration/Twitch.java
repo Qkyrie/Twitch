@@ -1,7 +1,7 @@
-package com.qkyrie.twitch.configuration;
+package com.deswaef.twitch.configuration;
 
-import com.qkyrie.twitch.work.ChannelChecker;
-import com.qkyrie.twitch.work.StreamChecker;
+import com.deswaef.twitch.work.ChannelChecker;
+import com.deswaef.twitch.work.StreamChecker;
 
 public class Twitch {
 

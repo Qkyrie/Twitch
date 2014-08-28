@@ -1,6 +1,6 @@
-package com.qkyrie.twitch.work;
+package com.deswaef.twitch.work;
 
-import com.qkyrie.twitch.domain.TwitchChannel;
+import com.deswaef.twitch.domain.TwitchChannel;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;

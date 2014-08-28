@@ -1,4 +1,4 @@
-package com.qkyrie.twitch.util;
+package com.deswaef.twitch.util;
 
 /**
  * User: Quinten

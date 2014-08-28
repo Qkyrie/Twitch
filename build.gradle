@@ -8,6 +8,7 @@ allprojects {
     version = '1.0-SNAPSHOT'
     apply plugin: 'java'
     apply plugin: 'idea'
+    group = 'com.deswaef'
 
     repositories {
         mavenCentral()

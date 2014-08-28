@@ -1,8 +1,8 @@
-package com.qkyrie.twitch.work;
+package com.deswaef.twitch.work;
 
-import com.qkyrie.twitch.domain.StreamCheck;
-import com.qkyrie.twitch.domain.Streams;
-import com.qkyrie.twitch.domain.TwitchStream;
+import com.deswaef.twitch.domain.StreamCheck;
+import com.deswaef.twitch.domain.Streams;
+import com.deswaef.twitch.domain.TwitchStream;
 import org.springframework.util.Assert;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
