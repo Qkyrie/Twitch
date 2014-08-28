@@ -5,19 +5,51 @@ buildscript {
 }
 
 allprojects {
-    version = '1.0-SNAPSHOT'
     apply plugin: 'java'
     apply plugin: 'idea'
-    group = 'com.deswaef'
+    apply plugin: 'maven'
+    apply plugin: 'signing'
+
+    version = '1.0.0-SNAPSHOT'
+    group = 'com.de-swaef'
+    sourceCompatibility = 1.8
 
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter")
-        compile("org.springframework:spring-web")
-        compile("com.fasterxml.jackson.core:jackson-databind")
+        compile("org.springframework.boot:spring-boot-starter:1.1.5.RELEASE")
+        compile("org.springframework:spring-web:4.0.6.RELEASE")
+        compile("com.fasterxml.jackson.core:jackson-databind:2.4.2.RELEASE")
     }
+
+    task "forceTest" {
+        dependsOn "cleanTest", "test"
+    }
+
+    task "fullBuild" {
+        dependsOn "cleanTest", "test", "check", "build"
+    }
+
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives javadocJar, sourcesJar
+    }
+
+    signing {
+        sign configurations.archives
+    }
+
+   
 }
 
