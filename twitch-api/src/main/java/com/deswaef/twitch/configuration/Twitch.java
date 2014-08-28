@@ -10,6 +10,13 @@ public class Twitch {
 
     private String url;
 
+    public static final Twitch newTwitchInstance(String baseUrl) {
+        return new Twitch()
+                .url(baseUrl)
+                .streams(new StreamChecker())
+                .channels(new ChannelChecker());
+    }
+
     public StreamChecker streams() {
         return streams;
     }
@@ -18,12 +25,12 @@ public class Twitch {
     }
 
     public Twitch streams(StreamChecker streamChecker) {
-        this.streams = streamChecker;
+        this.streams = streamChecker.url(this.url);
         return this;
     }
 
     public Twitch channels(ChannelChecker channelChecker) {
-        this.channels = channelChecker;
+        this.channels = channelChecker.url(this.url);
         return this;
     }
 
