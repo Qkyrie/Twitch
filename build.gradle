@@ -1,10 +1,8 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
+apply plugin: 'signing'
+apply plugin: 'maven'
+sourceCompatibility = 1.8
 
-allprojects {
+subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'maven'
@@ -19,7 +17,6 @@ allprojects {
     }
 
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter:1.1.5.RELEASE")
         compile("org.springframework:spring-web:4.0.6.RELEASE")
         compile("com.fasterxml.jackson.core:jackson-databind:2.4.2.RELEASE")
     }
@@ -49,7 +46,5 @@ allprojects {
     signing {
         sign configurations.archives
     }
-
-   
 }
 
