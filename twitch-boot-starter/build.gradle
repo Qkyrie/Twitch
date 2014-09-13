@@ -8,7 +8,7 @@ buildscript {
 
 dependencies {
     compile project(':twitch-api')
-    compile("org.springframework.boot:spring-boot-autoconfigure:1.1.5.RELEASE")
+    compile("org.springframework.boot:spring-boot-autoconfigure:1.1.6.RELEASE")
 }
 
 uploadArchives {

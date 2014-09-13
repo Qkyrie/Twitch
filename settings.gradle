@@ -1,1 +1,1 @@
-include ':twitch-api',':twitch-boot-starter'
+include ':twitch-api',':twitch-boot-starter',':twitch-boot-starter-example'
