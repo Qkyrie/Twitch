@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(value = "twitch", ignoreUnknownFields = true)
 public class TwitchProperties {
-    private String baseUrl;
+    private String baseUrl = "";
 
     public String getBaseUrl() {
         return baseUrl;

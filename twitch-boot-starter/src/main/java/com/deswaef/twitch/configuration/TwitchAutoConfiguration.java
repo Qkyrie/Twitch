@@ -6,6 +6,7 @@ import com.deswaef.twitch.work.StreamChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -19,14 +20,11 @@ import org.springframework.util.Assert;
  * @author Quinten De Swaef
  */
 @Configuration
-@PropertySource(value = "classpath:twitch.properties")
+@EnableConfigurationProperties(TwitchProperties.class)
 public class TwitchAutoConfiguration {
 
     @Autowired
-    private TwitchProperties twitchProperties = new TwitchProperties();
-
-    @Value("${twitch.url}")
-    private String url;
+    private TwitchProperties twitchProperties;
 
     @Bean
     public StreamChecker streamChecker() {
@@ -43,7 +41,7 @@ public class TwitchAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(Twitch.class)
     public Twitch provideTwitch() {
-        Assert.state(!getBaseUrl().isEmpty(), "the provided twitch url can not be empty!");
+        Assert.state(!getBaseUrl().isEmpty(), "the provided twitch url can not be empty!\nPlease Provide an url for the twitch API.");
         return new Twitch()
                 .channels(channelChecker())
                 .streams(streamChecker())
