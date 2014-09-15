@@ -10,6 +10,8 @@ public class Twitch {
 
     private String url;
 
+    private Twitch() {}
+
     public static final Twitch newTwitchInstance(String baseUrl) {
         return new Twitch()
                 .url(baseUrl)

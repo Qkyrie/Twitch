@@ -24,25 +24,10 @@ public class TwitchAutoConfiguration {
     private TwitchProperties twitchProperties;
 
     @Bean
-    public StreamChecker streamChecker() {
-        return new StreamChecker()
-                .url(getBaseUrl());
-    }
-
-    @Bean
-    public ChannelChecker channelChecker() {
-        return new ChannelChecker()
-                .url(getBaseUrl());
-    }
-
-    @Bean
     @ConditionalOnMissingBean(Twitch.class)
     public Twitch provideTwitch() {
         Assert.state(!getBaseUrl().isEmpty(), "the provided twitch url can not be empty!\nPlease Provide an url for the twitch API.");
-        return new Twitch()
-                .channels(channelChecker())
-                .streams(streamChecker())
-                .url(getBaseUrl());
+        return Twitch.newTwitchInstance(getBaseUrl());
     }
 
     private String getBaseUrl() {
