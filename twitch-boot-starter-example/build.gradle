@@ -18,7 +18,6 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'idea'
 
-
 dependencies {
     compile("org.springframework.boot:spring-boot-starter:1.1.6.RELEASE")
     compile project(':twitch-boot-starter')

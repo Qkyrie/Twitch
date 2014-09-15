@@ -9,7 +9,7 @@ subprojects {
     apply plugin: 'signing'
 
     version = '1.0.0-SNAPSHOT'
-    group = 'com.de-swaef'
+    group = 'com.de-swaef.twitch'
     sourceCompatibility = 1.8
 
     repositories {
