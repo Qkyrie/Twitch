@@ -1,5 +1,6 @@
 package com.deswaef.twitch.configuration;
 
+import com.deswaef.twitch.work.AuthorizingUserConnector;
 import com.deswaef.twitch.work.ChannelChecker;
 import com.deswaef.twitch.work.StreamChecker;
 import com.deswaef.twitch.work.oauth.AccessTokenFetcher;
@@ -9,6 +10,7 @@ public class Twitch {
     private StreamChecker streams;
     private ChannelChecker channels;
     private AccessTokenFetcher accessTokenFetcher;
+    private AuthorizingUserConnector authorizingUserConnector;
 
     private String url;
 
@@ -25,9 +27,11 @@ public class Twitch {
                 .streams(new StreamChecker())
                 .channels(new ChannelChecker())
                 .accessTokens(new AccessTokenFetcher()
-                                    .setClientId(clientId)
-                                    .setClientSecret(clientSecret)
-                                    .setRedirectUrl(redirectUrl));
+                        .setClientId(clientId)
+                        .setClientSecret(clientSecret)
+                        .setRedirectUrl(redirectUrl))
+                .user(new AuthorizingUserConnector())
+                ;
     }
 
     private Twitch accessTokens(AccessTokenFetcher accessTokenFetcher) {
@@ -44,6 +48,9 @@ public class Twitch {
     public ChannelChecker channels() {
         return channels;
     }
+    public AuthorizingUserConnector user() {
+        return authorizingUserConnector;
+    }
 
     public Twitch streams(StreamChecker streamChecker) {
         this.streams = streamChecker.url(this.url);
@@ -52,6 +59,11 @@ public class Twitch {
 
     public Twitch channels(ChannelChecker channelChecker) {
         this.channels = channelChecker.url(this.url);
+        return this;
+    }
+
+    public Twitch user(AuthorizingUserConnector authorizingUserConnector) {
+        this.authorizingUserConnector = authorizingUserConnector.url(this.url);
         return this;
     }
 
