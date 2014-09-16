@@ -2,23 +2,42 @@ package com.deswaef.twitch.configuration;
 
 import com.deswaef.twitch.work.ChannelChecker;
 import com.deswaef.twitch.work.StreamChecker;
+import com.deswaef.twitch.work.oauth.AccessTokenFetcher;
 
 public class Twitch {
 
     private StreamChecker streams;
     private ChannelChecker channels;
+    private AccessTokenFetcher accessTokenFetcher;
 
     private String url;
 
     private Twitch() {}
 
-    public static final Twitch newTwitchInstance(String baseUrl) {
+    public static final Twitch newTwitchInstance(
+            String baseUrl,
+            String clientId,
+            String clientSecret,
+            String redirectUrl
+    ) {
         return new Twitch()
                 .url(baseUrl)
                 .streams(new StreamChecker())
-                .channels(new ChannelChecker());
+                .channels(new ChannelChecker())
+                .accessTokens(new AccessTokenFetcher()
+                                    .setClientId(clientId)
+                                    .setClientSecret(clientSecret)
+                                    .setRedirectUrl(redirectUrl));
     }
 
+    private Twitch accessTokens(AccessTokenFetcher accessTokenFetcher) {
+        this.accessTokenFetcher = accessTokenFetcher.setBaseUrl(url);
+        return this;
+    }
+
+    public AccessTokenFetcher accessTokens() {
+        return accessTokenFetcher;
+    }
     public StreamChecker streams() {
         return streams;
     }
@@ -40,9 +59,4 @@ public class Twitch {
         this.url = url;
         return this;
     }
-
-    public String url() {
-        return url;
-    }
-
 }

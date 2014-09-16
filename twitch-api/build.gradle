@@ -11,8 +11,8 @@ buildscript {
 dependencies {
     compile("com.fasterxml.jackson.core:jackson-databind:2.4.2")
     compile("org.springframework:spring-web:4.0.6.RELEASE")
-    testCompile('junit:junit:4.11')
-    testCompile('org.easytesting:fest-assert:1.4')
+    compile 'org.apache.httpcomponents:httpclient:4.3.5'
+    testCompile('net.vidageek:mirror:1.6.1')
 }
 
 uploadArchives {

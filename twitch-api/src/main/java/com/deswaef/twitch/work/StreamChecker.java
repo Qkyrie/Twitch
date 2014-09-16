@@ -24,7 +24,7 @@ public class StreamChecker {
     /**
      * returns a list of the current top streams
      *
-     * @return
+     * @return List of TwitchStream
      */
     public List<TwitchStream> streams() {
         Assert.notNull(baseUrl, "base url for twitch must be set");
@@ -43,8 +43,8 @@ public class StreamChecker {
      * If the stream does not exist, the optional is empty.
      * Otherwise, utility methods in the StreamCheck will tell you if the stream is online or not.
      *
-     * @param stream
-     * @return
+     * @param stream String name of the stream
+     * @return Optional of StreamCheck
      */
     public Optional<StreamCheck> stream(String stream) {
         Assert.notNull(baseUrl, "base url for twitch must be set");
