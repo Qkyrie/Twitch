@@ -16,13 +16,21 @@ public class AccessTokenResponse {
                 .setStatus(AccessTokenResponseEnum.INVALID_CODE);
     }
 
+    public static AccessTokenResponse forbidden() {
+        return new AccessTokenResponse()
+                .setStatus(AccessTokenResponseEnum.FORBIDDEN);
+    }
+
     public static AccessTokenResponse unknown_issue() {
         return new AccessTokenResponse()
                 .setStatus(AccessTokenResponseEnum.UNKNOWN_ISSUE);
     }
 
+
+
     private String access_token;
     private String refresh_token;
+    private String[] scope;
 
     public String getAccess_token() {
         return access_token;
@@ -48,6 +56,15 @@ public class AccessTokenResponse {
 
     public AccessTokenResponse setStatus(AccessTokenResponseEnum status) {
         this.status = status;
+        return this;
+    }
+
+    public String[] getScope() {
+        return scope;
+    }
+
+    public AccessTokenResponse setScope(String[] scope) {
+        this.scope = scope;
         return this;
     }
 }

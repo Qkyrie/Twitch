@@ -1,6 +1,7 @@
 package com.deswaef.twitch.work.oauth;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -28,8 +29,14 @@ public class AccessTokenFetcher {
         RestTemplate template = new RestTemplate();
         template.getMessageConverters().add(new StringHttpMessageConverter());
         try {
-            return template.postForObject(baseUrl + oauthTokenUrl, new AccessTokenRequest(), AccessTokenResponse.class);
+            return template.postForObject(
+                    baseUrl + oauthTokenUrl,
+                    requestTemplate.copy(accessCode),
+                    AccessTokenResponse.class);
         } catch (HttpClientErrorException badRequestException) {
+            if(badRequestException.getStatusCode().equals(HttpStatus.FORBIDDEN)) {
+                return AccessTokenResponse.forbidden();
+            }
             return AccessTokenResponse.invalid_code();
         } catch(Exception ex) {
             return AccessTokenResponse.unknown_issue();

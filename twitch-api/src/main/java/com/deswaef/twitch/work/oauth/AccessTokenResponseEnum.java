@@ -8,5 +8,5 @@ package com.deswaef.twitch.work.oauth;
  * @author Quinten De Swaef
  */
 public enum AccessTokenResponseEnum {
-    OK, INVALID_CODE, UNKNOWN_ISSUE;
+    OK, INVALID_CODE, FORBIDDEN, UNKNOWN_ISSUE;
 }
