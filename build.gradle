@@ -1,16 +1,15 @@
 apply plugin: 'signing'
 apply plugin: 'maven'
-sourceCompatibility = 1.8
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'maven'
     apply plugin: 'signing'
+    sourceCompatibility = 1.8
 
     version = '1.0.0-SNAPSHOT'
-    group = 'com.de-swaef'
-    sourceCompatibility = 1.8
+    group = 'com.de-swaef.twitch'
 
     repositories {
         mavenCentral()
@@ -19,6 +18,8 @@ subprojects {
     dependencies {
         compile("org.springframework:spring-web:4.0.6.RELEASE")
         compile("com.fasterxml.jackson.core:jackson-databind:2.4.2.RELEASE")
+        testCompile('junit:junit:4.11')
+        testCompile('org.easytesting:fest-assert:1.4')
     }
 
     task "forceTest" {
@@ -45,6 +46,10 @@ subprojects {
 
     signing {
         sign configurations.archives
+    }
+
+    task wrapper(type: Wrapper) {
+        gradleVersion = '1.11'
     }
 }
 

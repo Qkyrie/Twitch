@@ -98,4 +98,19 @@ public class TwitchChannel {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        return "TwitchChannel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", display_name='" + display_name + '\'' +
+                ", game='" + game + '\'' +
+                ", delay=" + delay +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

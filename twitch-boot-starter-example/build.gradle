@@ -1,0 +1,26 @@
+buildscript {
+    ext {
+        springBootVersion = '1.1.6.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter:1.1.6.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-test:1.1.6.RELEASE")
+    compile project(':twitch-boot-starter')
+}
+
