@@ -60,6 +60,7 @@
 					<h1>Want to build an application on top of Twitch?</h1>
 					<p>Want a ready-to-use API for Twitch, written in <b>Java</b>? We've got you covered!</p>
                     <canvas id="doughnut" height="200" width="300"></canvas>
+                    <p style="display: none;" id="fadeThisIn"><b>active project!</b></p>
 				</div><!-- /col-lg-8 -->
 			</div><!-- /row -->
 	    </div> <!-- /container -->
@@ -144,8 +145,10 @@
 
           new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData, {
               animateScale: true,
-              animateRotate: true
-
+              animateRotate: true,
+              onAnimationComplete: function(){
+                  $("#fadeThisIn").fadeIn("slow");
+              }
           });
       }
 
