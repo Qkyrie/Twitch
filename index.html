@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>STANLEY - Free Bootstrap Theme </title>
+    <title>Java Twitch API - Open source Java Twitch API</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -56,9 +56,10 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 centered">
-					<img src="assets/img/user.png" alt="Stanley">
+					<img src="assets/img/portfolio/rsz_twitch.png" alt="Stanley">
 					<h1>Want to build an application on top of Twitch?</h1>
-					<p>Want a ready-to-use API for Twitch, writting in Java? We've got you covered!</p>
+					<p>Want a ready-to-use API for Twitch, written in <b>Java</b>? We've got you covered!</p>
+                    <canvas id="doughnut" height="200" width="300"></canvas>
 				</div><!-- /col-lg-8 -->
 			</div><!-- /row -->
 	    </div> <!-- /container -->
@@ -70,30 +71,16 @@
 	<div class="container pt">
 		<div class="row mt centered">	
 			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port01.jpg" alt="" /></a>
-				<p>APE</p>
+				<a class="zoom green" href="springboot.html"><img src="assets/img/portfolio/springboot.jpg" alt="" /></a>
+				<p>SPRING BOOT INTEGRATION</p>
 			</div>
 			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port02.jpg" alt="" /></a>
-				<p>RAIDERS</p>
+				<a class="zoom green" href="fluentapi.html"><img src="assets/img/portfolio/fluent.png" alt="" /></a>
+				<p>FLUENT API</p>
 			</div>
 			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port03.jpg" alt="" /></a>
-				<p>VIKINGS</p>
-			</div>
-		</div><!-- /row -->
-		<div class="row mt centered">	
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port04.jpg" alt="" /></a>
-				<p>YODA</p>
-			</div>
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port05.jpg" alt="" /></a>
-				<p>EMPERORS</p>
-			</div>
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port06.jpg" alt="" /></a>
-				<p>CHIEFS</p>
+				<a class="zoom green" href="https://github.com/Qkyrie/Twitch"><img src="assets/img/portfolio/opensource.png" alt="" /></a>
+				<p>OPEN SOURCE</p>
 			</div>
 		</div><!-- /row -->
 	</div><!-- /container -->
@@ -105,11 +92,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
-					<h4>My Bunker</h4>
+					<h4>Created by Quinten De Swaef</h4>
 					<p>
-						Some Address 987,<br/>
-						+34 9054 5455, <br/>
-						Madrid, Spain.
+						Freelance Java Developer,<br/>
+						Spring Fanatic, <br/>
+						Gamer.
 					</p>
 				</div><!-- /col-lg-4 -->
 				
@@ -137,5 +124,32 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/Chart.js" ></script>
+
+  <script type="application/javascript">
+
+      var inititialization = function() {
+          var doughnutData = [
+              {
+                  value: 40,
+                  color:"green",
+                  label: "finished (%)"
+              },
+              {
+                  value : 60,
+                  color : "#1abc9c",
+                  label: "in progress (%)"
+              }
+          ];
+
+          new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData, {
+              animateScale: true,
+              animateRotate: true
+
+          });
+      }
+
+      inititialization();
+  </script>
   </body>
 </html>
