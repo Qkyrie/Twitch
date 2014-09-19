@@ -13,6 +13,7 @@ dependencies {
     compile("org.springframework:spring-web:4.0.6.RELEASE")
     compile 'org.apache.httpcomponents:httpclient:4.3.5'
     testCompile('net.vidageek:mirror:1.6.1')
+    testCompile 'org.mockito:mockito-all:1.8.4'
 }
 
 uploadArchives {

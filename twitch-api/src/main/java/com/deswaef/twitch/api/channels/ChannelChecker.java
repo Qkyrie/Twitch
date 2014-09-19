@@ -1,9 +1,9 @@
-package com.deswaef.twitch.work;
+package com.deswaef.twitch.api.channels;
 
-import com.deswaef.twitch.domain.TwitchChannel;
+import com.deswaef.twitch.api.APIResource;
+import com.deswaef.twitch.api.channels.domain.TwitchChannel;
 import com.deswaef.twitch.rest.RestTemplateProvider;
 import org.springframework.util.Assert;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class ChannelChecker extends APIResource{
+public class ChannelChecker extends APIResource {
 
     private String baseUrl;
 

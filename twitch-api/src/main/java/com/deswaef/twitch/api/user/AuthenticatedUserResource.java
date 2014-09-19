@@ -1,10 +1,10 @@
-package com.deswaef.twitch.work;
+package com.deswaef.twitch.api.user;
 
-import com.deswaef.twitch.domain.AuthenticatedUser;
+import com.deswaef.twitch.api.APIResource;
+import com.deswaef.twitch.api.user.domain.AuthenticatedUser;
 import com.deswaef.twitch.exception.UnAuthorizedException;
 import com.deswaef.twitch.rest.RestTemplateProvider;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -15,14 +15,14 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class AuthorizingUserConnector extends APIResource{
+public class AuthenticatedUserResource extends APIResource {
     private String baseUrl;
 
-    public AuthorizingUserConnector() {
+    public AuthenticatedUserResource() {
         super();
     }
 
-    public AuthorizingUserConnector(RestTemplateProvider rtProvider) {
+    public AuthenticatedUserResource(RestTemplateProvider rtProvider) {
         super(rtProvider);
     }
 
@@ -35,10 +35,10 @@ public class AuthorizingUserConnector extends APIResource{
     }
 
     private String getUrlForAuthenticatedUser(String accessToken) {
-        return baseUrl + "/user" + "?oauth_token="+accessToken;
+        return baseUrl + "/user?oauth_token="+accessToken;
     }
 
-    public AuthorizingUserConnector url(String baseUrl) {
+    public AuthenticatedUserResource url(String baseUrl) {
         this.baseUrl = baseUrl;
         return this;
     }

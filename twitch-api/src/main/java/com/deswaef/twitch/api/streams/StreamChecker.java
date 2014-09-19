@@ -1,12 +1,12 @@
-package com.deswaef.twitch.work;
+package com.deswaef.twitch.api.streams;
 
-import com.deswaef.twitch.domain.StreamCheck;
-import com.deswaef.twitch.domain.Streams;
-import com.deswaef.twitch.domain.TwitchStream;
+import com.deswaef.twitch.api.APIResource;
+import com.deswaef.twitch.api.streams.domain.StreamCheck;
+import com.deswaef.twitch.api.streams.domain.Streams;
+import com.deswaef.twitch.api.streams.domain.TwitchStream;
 import com.deswaef.twitch.rest.RestTemplateProvider;
 import org.springframework.util.Assert;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;

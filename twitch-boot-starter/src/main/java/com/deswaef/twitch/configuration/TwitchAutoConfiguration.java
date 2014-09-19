@@ -1,7 +1,5 @@
 package com.deswaef.twitch.configuration;
 
-import com.deswaef.twitch.work.ChannelChecker;
-import com.deswaef.twitch.work.StreamChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

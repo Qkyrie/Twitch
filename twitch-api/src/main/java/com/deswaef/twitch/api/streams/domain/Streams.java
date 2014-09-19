@@ -1,5 +1,6 @@
-package com.deswaef.twitch.domain;
+package com.deswaef.twitch.api.streams.domain;
 
+import com.deswaef.twitch.api.streams.domain.TwitchStream;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Arrays;

@@ -1,8 +1,10 @@
-package com.deswaef.twitch.work.oauth;
+package com.deswaef.twitch.api.oauth;
 
 
+import com.deswaef.twitch.api.oauth.domain.AccessTokenRequest;
+import com.deswaef.twitch.api.oauth.domain.AccessTokenResponse;
 import com.deswaef.twitch.rest.RestTemplateProvider;
-import com.deswaef.twitch.work.APIResource;
+import com.deswaef.twitch.api.APIResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
@@ -15,19 +17,19 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Quinten De Swaef
  */
-public class AccessTokenFetcher extends APIResource {
+public class AccessTokenResource extends APIResource {
 
     private String oauthTokenUrl = "/oauth2/token";
     private String baseUrl;
 
     private AccessTokenRequest requestTemplate;
 
-    public AccessTokenFetcher() {
+    public AccessTokenResource() {
         super();
         requestTemplate = new AccessTokenRequest();
     }
 
-    public AccessTokenFetcher(RestTemplateProvider rtProvider) {
+    public AccessTokenResource(RestTemplateProvider rtProvider) {
         super(rtProvider);
         requestTemplate = new AccessTokenRequest();
     }
@@ -50,24 +52,24 @@ public class AccessTokenFetcher extends APIResource {
         }
     }
 
-    public AccessTokenFetcher setBaseUrl(String baseUrl) {
+    public AccessTokenResource setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
         return this;
     }
 
-    public AccessTokenFetcher setClientId(String clientId) {
+    public AccessTokenResource setClientId(String clientId) {
         this.requestTemplate.setClient_id(clientId);
         return this;
     }
 
 
-    public AccessTokenFetcher setClientSecret(String clientSecret) {
+    public AccessTokenResource setClientSecret(String clientSecret) {
         this.requestTemplate.setClient_secret(clientSecret);
         return this;
     }
 
 
-    public AccessTokenFetcher setRedirectUrl(String redirectUrl) {
+    public AccessTokenResource setRedirectUrl(String redirectUrl) {
         this.requestTemplate.setRedirect_uri(redirectUrl);
         return this;
     }

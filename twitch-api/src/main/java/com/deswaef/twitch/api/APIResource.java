@@ -1,4 +1,4 @@
-package com.deswaef.twitch.work;
+package com.deswaef.twitch.api;
 
 import com.deswaef.twitch.rest.RestTemplateProvider;
 import org.springframework.web.client.RestTemplate;

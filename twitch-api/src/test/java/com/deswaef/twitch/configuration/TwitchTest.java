@@ -1,7 +1,7 @@
 package com.deswaef.twitch.configuration;
 
 
-import com.deswaef.twitch.work.oauth.AccessTokenRequest;
+import com.deswaef.twitch.api.oauth.domain.AccessTokenRequest;
 import net.vidageek.mirror.dsl.Mirror;
 import org.junit.Before;
 import org.junit.Test;

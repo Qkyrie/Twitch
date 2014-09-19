@@ -1,4 +1,4 @@
-package com.deswaef.twitch.domain;
+package com.deswaef.twitch.api.channels.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package com.deswaef.twitch.work.oauth;
+package com.deswaef.twitch.api.oauth.domain;
 
 /**
  * User: Quinten

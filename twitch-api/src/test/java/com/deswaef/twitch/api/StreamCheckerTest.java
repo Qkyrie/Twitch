@@ -1,5 +1,6 @@
-package com.deswaef.twitch.work;
+package com.deswaef.twitch.api;
 
+import com.deswaef.twitch.api.streams.StreamChecker;
 import org.junit.Before;
 import org.junit.Test;
 

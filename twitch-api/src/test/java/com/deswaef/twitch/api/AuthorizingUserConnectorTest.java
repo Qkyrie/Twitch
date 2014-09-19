@@ -1,6 +1,7 @@
-package com.deswaef.twitch.work;
+package com.deswaef.twitch.api;
 
 
+import com.deswaef.twitch.api.user.AuthenticatedUserResource;
 import com.deswaef.twitch.exception.UnAuthorizedException;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,11 +10,11 @@ import static com.deswaef.twitch.util.TwitchTestHelper.assertThrows;
 
 public class AuthorizingUserConnectorTest {
 
-    private AuthorizingUserConnector connector;
+    private AuthenticatedUserResource connector;
 
     @Before
     public void init() {
-        connector = new AuthorizingUserConnector().url("https://api.twitch.tv/kraken");
+        connector = new AuthenticatedUserResource().url("https://api.twitch.tv/kraken");
     }
 
     @Test

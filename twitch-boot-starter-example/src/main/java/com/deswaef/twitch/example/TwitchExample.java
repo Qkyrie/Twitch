@@ -1,7 +1,7 @@
 package com.deswaef.twitch.example;
 
 import com.deswaef.twitch.configuration.Twitch;
-import com.deswaef.twitch.domain.TwitchChannel;
+import com.deswaef.twitch.api.channels.domain.TwitchChannel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,8 @@
-package com.deswaef.twitch.work;
+package com.deswaef.twitch.api;
 
 
-import com.deswaef.twitch.domain.TwitchChannel;
+import com.deswaef.twitch.api.channels.domain.TwitchChannel;
+import com.deswaef.twitch.api.channels.ChannelChecker;
 import org.junit.Before;
 import org.junit.Test;
 
