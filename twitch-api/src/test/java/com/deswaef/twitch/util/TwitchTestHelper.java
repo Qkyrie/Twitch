@@ -53,7 +53,7 @@ public final class TwitchTestHelper {
                 assertionBlock.apply(ex);
                 return ex;
             }
-            fail(String.format("Block of code throw wrong Exception.\nExpected: %s\nActual:%s", expectedException.getName(), ex.getClass().getName()));
+            fail(String.format("Block of code threw wrong Exception.\nExpected: %s\nActual:%s", expectedException.getName(), ex.getClass().getName()));
             return null;
         }
         fail(String.format("Block of code did not throw an exception.\nExpected: %s", expectedException.getName()));

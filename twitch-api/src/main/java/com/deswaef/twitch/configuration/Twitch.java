@@ -1,5 +1,6 @@
 package com.deswaef.twitch.configuration;
 
+import com.deswaef.twitch.rest.RestTemplateProvider;
 import com.deswaef.twitch.work.AuthorizingUserConnector;
 import com.deswaef.twitch.work.ChannelChecker;
 import com.deswaef.twitch.work.StreamChecker;
@@ -22,15 +23,16 @@ public class Twitch {
             String clientSecret,
             String redirectUrl
     ) {
+        RestTemplateProvider provider = new RestTemplateProvider();
         return new Twitch()
                 .url(baseUrl)
-                .streams(new StreamChecker())
-                .channels(new ChannelChecker())
-                .accessTokens(new AccessTokenFetcher()
+                .streams(new StreamChecker(provider))
+                .channels(new ChannelChecker(provider))
+                .accessTokens(new AccessTokenFetcher(provider)
                         .setClientId(clientId)
                         .setClientSecret(clientSecret)
                         .setRedirectUrl(redirectUrl))
-                .user(new AuthorizingUserConnector())
+                .user(new AuthorizingUserConnector(provider))
                 ;
     }
 

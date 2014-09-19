@@ -1,6 +1,8 @@
 package com.deswaef.twitch.work.oauth;
 
 
+import com.deswaef.twitch.rest.RestTemplateProvider;
+import com.deswaef.twitch.work.APIResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
@@ -13,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Quinten De Swaef
  */
-public class AccessTokenFetcher {
+public class AccessTokenFetcher extends APIResource {
 
     private String oauthTokenUrl = "/oauth2/token";
     private String baseUrl;
@@ -21,15 +23,20 @@ public class AccessTokenFetcher {
     private AccessTokenRequest requestTemplate;
 
     public AccessTokenFetcher() {
+        super();
         requestTemplate = new AccessTokenRequest();
     }
 
+    public AccessTokenFetcher(RestTemplateProvider rtProvider) {
+        super(rtProvider);
+        requestTemplate = new AccessTokenRequest();
+    }
 
     public AccessTokenResponse requestToken(String accessCode) {
-        RestTemplate template = new RestTemplate();
-        template.getMessageConverters().add(new StringHttpMessageConverter());
+        RestTemplate rest = rest();
+        rest.getMessageConverters().add(new StringHttpMessageConverter());
         try {
-            return template.postForObject(
+            return rest.postForObject(
                     baseUrl + oauthTokenUrl,
                     requestTemplate.copy(accessCode),
                     AccessTokenResponse.class);

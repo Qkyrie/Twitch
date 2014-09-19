@@ -2,6 +2,7 @@ package com.deswaef.twitch.work;
 
 import com.deswaef.twitch.domain.AuthenticatedUser;
 import com.deswaef.twitch.exception.UnAuthorizedException;
+import com.deswaef.twitch.rest.RestTemplateProvider;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,15 +15,20 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class AuthorizingUserConnector {
+public class AuthorizingUserConnector extends APIResource{
     private String baseUrl;
 
-    RestTemplate template;
+    public AuthorizingUserConnector() {
+        super();
+    }
+
+    public AuthorizingUserConnector(RestTemplateProvider rtProvider) {
+        super(rtProvider);
+    }
 
     public Optional<AuthenticatedUser> getAuthenticatedUser(String accessToken) throws UnAuthorizedException{
         try {
-            template = new RestTemplate();
-            return Optional.ofNullable(template.getForObject(getUrlForAuthenticatedUser(accessToken), AuthenticatedUser.class));
+            return Optional.ofNullable(rest().getForObject(getUrlForAuthenticatedUser(accessToken), AuthenticatedUser.class));
         } catch (HttpClientErrorException ex) {
             throw new UnAuthorizedException();
         }

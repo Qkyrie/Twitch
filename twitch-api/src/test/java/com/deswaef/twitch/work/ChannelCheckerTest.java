@@ -1,8 +1,11 @@
 package com.deswaef.twitch.work;
 
 
+import com.deswaef.twitch.domain.TwitchChannel;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Optional;
 
 import static com.deswaef.twitch.util.TwitchTestHelper.assertThrows;
 import static org.fest.assertions.Assertions.assertThat;
@@ -25,9 +28,23 @@ public class ChannelCheckerTest {
     @Test
     public void verifyExistingChannel(){
         final ChannelChecker newChannelChecker = channelChecker.url("https://api.twitch.tv/kraken");
-        assertThat(newChannelChecker.channel("streamingforanimals").isPresent())
+        Optional<TwitchChannel> streamingforanimals = newChannelChecker.channel("streamingforanimals");
+        assertThat(streamingforanimals.isPresent())
                 .isTrue();
     }
+
+
+    @Test
+    public void verifyChannelHasCorrectFields(){
+        final ChannelChecker newChannelChecker = channelChecker.url("https://api.twitch.tv/kraken");
+        Optional<TwitchChannel> streamingforanimals = newChannelChecker.channel("streamingforanimals");
+        assertThat(streamingforanimals.get().getDisplay_name()).isEqualTo("StreamingForAnimals");
+        assertThat(streamingforanimals.get().getStatus()).isNotEmpty();
+        assertThat(streamingforanimals.get().getCreatedAt()).isNotNull();
+        assertThat(streamingforanimals.get().getUpdatedAt()).isNotNull();
+        assertThat(streamingforanimals.get().getUrl()).isEqualTo("http://www.twitch.tv/streamingforanimals");
+    }
+
 
     @Test
     public void verifyUnexistingChannel(){

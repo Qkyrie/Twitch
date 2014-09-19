@@ -9,5 +9,5 @@ package com.deswaef.twitch.util;
  */
 @FunctionalInterface
 public interface ExceptionAssertiable {
-    <T extends Throwable> void apply(T throwable);
+    void apply(Throwable throwable);
 }

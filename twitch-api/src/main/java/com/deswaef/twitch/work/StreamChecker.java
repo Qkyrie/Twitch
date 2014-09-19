@@ -3,6 +3,7 @@ package com.deswaef.twitch.work;
 import com.deswaef.twitch.domain.StreamCheck;
 import com.deswaef.twitch.domain.Streams;
 import com.deswaef.twitch.domain.TwitchStream;
+import com.deswaef.twitch.rest.RestTemplateProvider;
 import org.springframework.util.Assert;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -18,8 +19,17 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class StreamChecker {
+public class StreamChecker extends APIResource {
     private String baseUrl;
+
+
+    public StreamChecker() {
+        super();
+    }
+
+    public StreamChecker(RestTemplateProvider provider) {
+        super(provider);
+    }
 
     /**
      * returns a list of the current top streams
@@ -28,9 +38,8 @@ public class StreamChecker {
      */
     public List<TwitchStream> streams() {
         Assert.notNull(baseUrl, "base url for twitch must be set");
-        RestTemplate template = new RestTemplate();
         return Arrays.asList(
-                template.getForObject
+                rest().getForObject
                         (
                             String.format("%s/streams", baseUrl),
                             Streams.class
@@ -49,8 +58,7 @@ public class StreamChecker {
     public Optional<StreamCheck> stream(String stream) {
         Assert.notNull(baseUrl, "base url for twitch must be set");
         try {
-            RestTemplate template = new RestTemplate();
-            return Optional.of(template.getForObject(String.format("%s/streams/%s", baseUrl, stream), StreamCheck.class));
+            return Optional.of(rest().getForObject(String.format("%s/streams/%s", baseUrl, stream), StreamCheck.class));
         } catch (HttpClientErrorException exception) {
             return Optional.empty();
         }
