@@ -6,7 +6,7 @@ import com.deswaef.twitch.exception.UnAuthorizedException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.deswaef.twitch.util.TwitchTestHelper.assertThrows;
+import static com.deswaef.twitch.util.ThrowableAssertion.assertThrown;
 
 public class AuthorizingUserConnectorTest {
 
@@ -19,6 +19,8 @@ public class AuthorizingUserConnectorTest {
 
     @Test
     public void testAndFaultyAccessToken() {
-        assertThrows(UnAuthorizedException.class, () -> connector.getAuthenticatedUser("token"));
+        assertThrown(
+                () -> connector.getAuthenticatedUser("token")
+        ).isInstanceOf(UnAuthorizedException.class);
     }
 }

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static com.deswaef.twitch.util.TwitchTestHelper.assertThrows;
+import static com.deswaef.twitch.util.ThrowableAssertion.assertThrown;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ChannelCheckerTest {
@@ -21,9 +21,9 @@ public class ChannelCheckerTest {
 
     @Test
     public void channelAndNoBaseUrlSet() {
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> channelChecker.channel("streamingforanimals"));
+        assertThrown(
+                () -> channelChecker.channel("streamingforanimals")
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

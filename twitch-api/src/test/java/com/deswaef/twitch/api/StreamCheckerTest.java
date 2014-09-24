@@ -4,7 +4,7 @@ import com.deswaef.twitch.api.streams.StreamChecker;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.deswaef.twitch.util.TwitchTestHelper.assertThrows;
+import static com.deswaef.twitch.util.ThrowableAssertion.assertThrown;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class StreamCheckerTest {
@@ -16,10 +16,8 @@ public class StreamCheckerTest {
     }
 
     @Test
-    public void whenStreamsAndBaseUrlNullThrowsError(){
-        assertThrows(IllegalArgumentException.class,
-                () -> streamChecker.streams()
-        );
+    public void whenStreamsAndBaseUrlNullThrowsError() {
+        assertThrown(() -> streamChecker.streams()).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

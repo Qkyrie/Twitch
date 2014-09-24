@@ -3,7 +3,7 @@ package com.deswaef.twitch.util;
 import org.junit.Test;
 
 import static com.deswaef.twitch.util.AuthorizationURLBuilder.buildAuthorizationUrl;
-import static com.deswaef.twitch.util.TwitchTestHelper.assertThrows;
+import static com.deswaef.twitch.util.ThrowableAssertion.assertThrown;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class AuthorizationURLBuilderTest {
@@ -16,54 +16,52 @@ public class AuthorizationURLBuilderTest {
 
     @Test
     public void baseUrlShouldBeSet() {
-        assertThrows(IllegalStateException.class,
+
+        assertThrown(
                 () -> buildAuthorizationUrl()
                         .clientId(CLIENT_ID)
                         .redirectURI(REDIRECT_URI)
                         .withScope(SCOPE_1)
                         .withScope(SCOPE_2)
-                        .toString(),
-                throwable -> assertThat(throwable.getMessage()).isEqualTo("Cannot build authentication url, please set the baseURL first")
-        );
+                        .toString()
+        ).isInstanceOf(IllegalStateException.class);
     }
 
     @Test
     public void clientIdShouldBeSet() {
-        assertThrows(IllegalStateException.class,
+        assertThrown(
                 () -> buildAuthorizationUrl()
                         .baseUrl(BASE_URL)
                         .redirectURI(REDIRECT_URI)
                         .withScope(SCOPE_1)
                         .withScope(SCOPE_2)
-                        .toString(),
-                throwable -> assertThat(throwable.getMessage()).isEqualTo("Cannot build authentication url, please set the clientId first")
-        );
+                        .toString()
+        ).isInstanceOf(IllegalStateException.class);
     }
 
     @Test
     public void redirectURIShouldBeSet() {
-        assertThrows(IllegalStateException.class,
+        assertThrown(
                 () -> buildAuthorizationUrl()
                         .baseUrl(BASE_URL)
                         .clientId(CLIENT_ID)
                         .withScope(SCOPE_1)
                         .withScope(SCOPE_2)
-                        .toString(),
-                throwable -> assertThat(throwable.getMessage()).isEqualTo("Cannot build authentication url, please set the redirectURI first")
-        );
+                        .toString()
+        ).isInstanceOf(IllegalStateException.class);
     }
 
 
     @Test
     public void scopeShouldBeSet() {
-        assertThrows(IllegalStateException.class,
+        assertThrown(
                 () -> buildAuthorizationUrl()
                         .baseUrl(BASE_URL)
                         .clientId(CLIENT_ID)
                         .redirectURI(REDIRECT_URI)
-                        .toString(),
-                throwable -> assertThat(throwable.getMessage()).isEqualTo("Cannot build authentication url, please set the scopes first")
-        );
+                        .toString()
+        ).isInstanceOf(IllegalStateException.class)
+                .hasMessage("Cannot build authentication url, please set the scopes first");
     }
 
     @Test
