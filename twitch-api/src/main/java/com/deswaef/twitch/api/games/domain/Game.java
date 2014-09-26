@@ -14,10 +14,25 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Game {
-    @JsonProperty("_links")
-    private List<String> links;
+
     @JsonProperty("_id")
     private Long id;
     @JsonProperty("giantbomb_id")
     private Long giantbombId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getGiantbombId() {
+        return giantbombId;
+    }
+
+    public void setGiantbombId(Long giantbombId) {
+        this.giantbombId = giantbombId;
+    }
 }

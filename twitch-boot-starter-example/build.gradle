@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.1.6.RELEASE'
+        springBootVersion = '1.1.7.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -19,8 +19,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter:1.1.6.RELEASE")
-    compile("org.springframework.boot:spring-boot-starter-test:1.1.6.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework.boot:spring-boot-starter-test")
     compile project(':twitch-boot-starter')
 }
 

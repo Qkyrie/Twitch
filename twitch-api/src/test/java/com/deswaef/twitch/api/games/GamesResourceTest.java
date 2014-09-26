@@ -1,5 +1,7 @@
 package com.deswaef.twitch.api.games;
 
+import com.deswaef.twitch.api.games.domain.Game;
+import com.deswaef.twitch.api.games.domain.GameTopResult;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,5 +29,19 @@ public class GamesResourceTest {
     @Test
     public void topHas10GameInfos(){
         assertThat(gamesResource.top().get().getTop().size()).isEqualTo(10);
+    }
+
+    @Test
+    public void topHasValidGames() {
+        gamesResource.top().get().getTop().stream()
+                .map(x -> x.getGame())
+                .forEach(
+                        this::validateGame
+                );
+    }
+
+    private void validateGame(Game game) {
+        assertThat(game.getGiantbombId()).isGreaterThan(0);
+        assertThat(game.getId()).isGreaterThan(0);
     }
 }
