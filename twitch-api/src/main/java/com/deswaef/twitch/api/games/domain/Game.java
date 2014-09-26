@@ -19,6 +19,10 @@ public class Game {
     private Long id;
     @JsonProperty("giantbomb_id")
     private Long giantbombId;
+    @JsonProperty("box")
+    private GameImage box;
+    @JsonProperty("logo")
+    private GameImage logo;
 
     public Long getId() {
         return id;
@@ -34,5 +38,21 @@ public class Game {
 
     public void setGiantbombId(Long giantbombId) {
         this.giantbombId = giantbombId;
+    }
+
+    public GameImage getBox() {
+        return box;
+    }
+
+    public void setBox(GameImage box) {
+        this.box = box;
+    }
+
+    public GameImage getLogo() {
+        return logo;
+    }
+
+    public void setLogo(GameImage logo) {
+        this.logo = logo;
     }
 }

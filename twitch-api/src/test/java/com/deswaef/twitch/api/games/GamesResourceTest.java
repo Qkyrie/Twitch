@@ -1,6 +1,7 @@
 package com.deswaef.twitch.api.games;
 
 import com.deswaef.twitch.api.games.domain.Game;
+import com.deswaef.twitch.api.games.domain.GameImage;
 import com.deswaef.twitch.api.games.domain.GameTopResult;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,32 @@ public class GamesResourceTest {
                         this::validateGame
                 );
     }
+
+    @Test
+    public void topHasValidGameLogos(){
+        gamesResource.top().get().getTop().stream()
+                .map(x -> x.getGame().getLogo())
+                .forEach(
+                        this::validateImage
+                );
+    }
+
+    @Test
+    public void topHasValidBox(){
+        gamesResource.top().get().getTop().stream()
+                .map(x -> x.getGame().getBox())
+                .forEach(
+                        this::validateImage
+                );
+    }
+
+    private void validateImage(GameImage gameImage) {
+        assertThat(gameImage.getLarge()).isNotEmpty();
+        assertThat(gameImage.getMedium()).isNotEmpty();
+        assertThat(gameImage.getSmall()).isNotEmpty();
+        assertThat(gameImage.getTemplate()).isNotEmpty();
+    }
+
 
     private void validateGame(Game game) {
         assertThat(game.getGiantbombId()).isGreaterThan(0);
