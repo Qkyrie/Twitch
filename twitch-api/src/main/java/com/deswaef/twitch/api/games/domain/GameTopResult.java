@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameTopResult {
 
-    private Game game;
+   // private Game game;
     private Long viewers;
     private Long channels;
 
@@ -33,12 +33,12 @@ public class GameTopResult {
     public void setChannels(Long channels) {
         this.channels = channels;
     }
-
+/*
     public Game getGame() {
         return game;
     }
 
     public void setGame(Game game) {
         this.game = game;
-    }
+    }*/
 }

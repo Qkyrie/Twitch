@@ -18,4 +18,14 @@ public class GamesResourceTest {
     public void topReturnsResults() {
         assertThat(gamesResource.top().isPresent()).isTrue();
     }
+
+    @Test
+    public void topHasTotalInformation() {
+        assertThat(gamesResource.top().get().getTotal()).isGreaterThan(0);
+    }
+
+    @Test
+    public void topHas10GameInfos(){
+        assertThat(gamesResource.top().get().getTop().size()).isEqualTo(10);
+    }
 }

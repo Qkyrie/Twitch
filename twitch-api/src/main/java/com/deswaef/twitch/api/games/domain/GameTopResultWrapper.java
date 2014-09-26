@@ -26,8 +26,6 @@ public class GameTopResultWrapper {
         this.total = total;
     }
 
-
-    /*
     @JsonProperty("top")
     private List<GameTopResult> top;
 
@@ -37,5 +35,5 @@ public class GameTopResultWrapper {
 
     public void setTop(List<GameTopResult> top) {
         this.top = top;
-    } */
+    }
 }
