@@ -15,6 +15,19 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameTopResultWrapper {
 
+    @JsonProperty("_total")
+    private Long total;
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
+
+    /*
     @JsonProperty("top")
     private List<GameTopResult> top;
 
@@ -24,5 +37,5 @@ public class GameTopResultWrapper {
 
     public void setTop(List<GameTopResult> top) {
         this.top = top;
-    }
+    } */
 }

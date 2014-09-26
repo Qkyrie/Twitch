@@ -1,9 +1,7 @@
 package com.deswaef.twitch.util;
 
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class ThrowableAssertion {
 
@@ -23,23 +21,23 @@ public class ThrowableAssertion {
     }
 
     public ThrowableAssertion isInstanceOf(Class<? extends Throwable> exceptionClass) {
-        assertThat(caught, Matchers.isA((Class<Throwable>) exceptionClass));
+        assertThat(caught).isInstanceOf(exceptionClass);
         return this;
     }
 
     public ThrowableAssertion hasMessage(String expectedMessage) {
-        assertThat(caught.getMessage(), Matchers.equalTo(expectedMessage));
+        assertThat(caught.getMessage()).isEqualTo(expectedMessage);
         return this;
     }
 
     public ThrowableAssertion hasNoCause() {
-        assertThat(caught.getCause(), Matchers.nullValue());
+        assertThat(caught.getCause()).isNull();
         return this;
     }
 
     public ThrowableAssertion hasCauseInstanceOf(Class<? extends Throwable> exceptionClass) {
-        assertThat(caught.getCause(), Matchers.notNullValue());
-        assertThat(caught.getCause(), Matchers.isA((Class<Throwable>) exceptionClass));
+        assertThat(caught.getCause()).isNotNull();
+        assertThat(caught.getCause()).isInstanceOf(exceptionClass);
         return this;
     }
 }

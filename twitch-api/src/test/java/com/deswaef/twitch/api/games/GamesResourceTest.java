@@ -1,6 +1,5 @@
 package com.deswaef.twitch.api.games;
 
-import com.deswaef.twitch.api.games.domain.GameTopResultWrapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,11 +18,4 @@ public class GamesResourceTest {
     public void topReturnsResults() {
         assertThat(gamesResource.top().isPresent()).isTrue();
     }
-
-    @Test
-    public void validateValues(){
-        GameTopResultWrapper gameResponse = gamesResource.top().get();
-        assertThat(gameResponse.getTop().size()).isEqualTo(10);
-    }
-
 }
