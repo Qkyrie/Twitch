@@ -14,15 +14,15 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class ChannelChecker extends APIResource {
+public class ChannelResource extends APIResource {
 
     private String baseUrl;
 
-    public ChannelChecker() {
+    public ChannelResource() {
         super();
     }
 
-    public ChannelChecker(RestTemplateProvider rtProvider) {
+    public ChannelResource(RestTemplateProvider rtProvider) {
         super(rtProvider);
     }
 
@@ -35,7 +35,7 @@ public class ChannelChecker extends APIResource {
         }
     }
 
-    public ChannelChecker url(String url)
+    public ChannelResource url(String url)
     {
         this.baseUrl = url;
         return this;

@@ -19,15 +19,14 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class StreamChecker extends APIResource {
+public class StreamResource extends APIResource {
     private String baseUrl;
 
-
-    public StreamChecker() {
+    public StreamResource() {
         super();
     }
 
-    public StreamChecker(RestTemplateProvider provider) {
+    public StreamResource(RestTemplateProvider provider) {
         super(provider);
     }
 
@@ -64,7 +63,7 @@ public class StreamChecker extends APIResource {
         }
     }
 
-    public StreamChecker url(String url) {
+    public StreamResource url(String url) {
         this.baseUrl = url;
         return this;
     }

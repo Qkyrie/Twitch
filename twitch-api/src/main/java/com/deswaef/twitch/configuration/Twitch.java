@@ -1,15 +1,15 @@
 package com.deswaef.twitch.configuration;
 
+import com.deswaef.twitch.api.channels.ChannelResource;
 import com.deswaef.twitch.api.oauth.AccessTokenResource;
 import com.deswaef.twitch.api.user.AuthenticatedUserResource;
 import com.deswaef.twitch.rest.RestTemplateProvider;
-import com.deswaef.twitch.api.channels.ChannelChecker;
-import com.deswaef.twitch.api.streams.StreamChecker;
+import com.deswaef.twitch.api.streams.StreamResource;
 
 public class Twitch {
 
-    private StreamChecker streams;
-    private ChannelChecker channels;
+    private StreamResource streams;
+    private ChannelResource channels;
     private AccessTokenResource accessTokenResource;
     private AuthenticatedUserResource authenticatedUserResource;
 
@@ -26,8 +26,8 @@ public class Twitch {
         RestTemplateProvider provider = new RestTemplateProvider();
         return new Twitch()
                 .url(baseUrl)
-                .streams(new StreamChecker(provider))
-                .channels(new ChannelChecker(provider))
+                .streams(new StreamResource(provider))
+                .channels(new ChannelResource(provider))
                 .accessTokens(new AccessTokenResource(provider)
                         .setClientId(clientId)
                         .setClientSecret(clientSecret)
@@ -44,23 +44,23 @@ public class Twitch {
     public AccessTokenResource accessTokens() {
         return accessTokenResource;
     }
-    public StreamChecker streams() {
+    public StreamResource streams() {
         return streams;
     }
-    public ChannelChecker channels() {
+    public ChannelResource channels() {
         return channels;
     }
     public AuthenticatedUserResource user() {
         return authenticatedUserResource;
     }
 
-    public Twitch streams(StreamChecker streamChecker) {
-        this.streams = streamChecker.url(this.url);
+    public Twitch streams(StreamResource streamResource) {
+        this.streams = streamResource.url(this.url);
         return this;
     }
 
-    public Twitch channels(ChannelChecker channelChecker) {
-        this.channels = channelChecker.url(this.url);
+    public Twitch channels(ChannelResource channelResource) {
+        this.channels = channelResource.url(this.url);
         return this;
     }
 

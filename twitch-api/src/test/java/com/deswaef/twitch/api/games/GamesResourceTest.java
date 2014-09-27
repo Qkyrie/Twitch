@@ -3,6 +3,7 @@ package com.deswaef.twitch.api.games;
 import com.deswaef.twitch.api.games.domain.Game;
 import com.deswaef.twitch.api.games.domain.GameImage;
 import com.deswaef.twitch.api.games.domain.GameTopResult;
+import net.vidageek.mirror.dsl.Mirror;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,11 +11,17 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class GamesResourceTest {
 
+    public static final String API_URL = "https://api.twitch.tv/kraken";
     private GamesResource gamesResource;
 
     @Before
     public void init() {
         gamesResource = new GamesResource().url("https://api.twitch.tv/kraken");
+    }
+
+    @Test
+    public void initializedAndUrlIsSet() {
+        assertThat(new Mirror().on(gamesResource).get().field("baseUrl")).isEqualTo(API_URL);
     }
 
     @Test

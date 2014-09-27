@@ -1,4 +1,4 @@
-package com.deswaef.twitch.api;
+package com.deswaef.twitch.api.oauth;
 
 
 import com.deswaef.twitch.api.user.AuthenticatedUserResource;
