@@ -2,7 +2,7 @@ package com.deswaef.twitch.configuration;
 
 import com.deswaef.twitch.api.channels.ChannelResource;
 import com.deswaef.twitch.api.oauth.AccessTokenResource;
-import com.deswaef.twitch.api.user.AuthenticatedUserResource;
+import com.deswaef.twitch.api.user.UserResource;
 import com.deswaef.twitch.rest.RestTemplateProvider;
 import com.deswaef.twitch.api.streams.StreamResource;
 
@@ -11,7 +11,7 @@ public class Twitch {
     private StreamResource streams;
     private ChannelResource channels;
     private AccessTokenResource accessTokenResource;
-    private AuthenticatedUserResource authenticatedUserResource;
+    private UserResource userResource;
 
     private String url;
 
@@ -32,7 +32,7 @@ public class Twitch {
                         .setClientId(clientId)
                         .setClientSecret(clientSecret)
                         .setRedirectUrl(redirectUrl))
-                .user(new AuthenticatedUserResource(provider))
+                .user(new UserResource(provider))
                 ;
     }
 
@@ -50,8 +50,8 @@ public class Twitch {
     public ChannelResource channels() {
         return channels;
     }
-    public AuthenticatedUserResource user() {
-        return authenticatedUserResource;
+    public UserResource user() {
+        return userResource;
     }
 
     public Twitch streams(StreamResource streamResource) {
@@ -64,8 +64,8 @@ public class Twitch {
         return this;
     }
 
-    public Twitch user(AuthenticatedUserResource authenticatedUserResource) {
-        this.authenticatedUserResource = authenticatedUserResource.url(this.url);
+    public Twitch user(UserResource userResource) {
+        this.userResource = userResource.url(this.url);
         return this;
     }
 

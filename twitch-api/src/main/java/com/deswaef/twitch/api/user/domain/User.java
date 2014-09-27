@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Quinten De Swaef
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AuthenticatedUser {
+public class User {
 
     private String name;
     @JsonProperty(value = "created_at")
