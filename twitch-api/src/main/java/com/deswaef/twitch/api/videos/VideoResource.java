@@ -19,6 +19,14 @@ public class VideoResource extends APIResource {
 
     private String baseUrl;
 
+    public Optional<Video> video(String id) {
+        try {
+            return Optional.ofNullable(rest().getForObject(String.format("%s/videos/%s", baseUrl, id), Video.class));
+        } catch (Exception ex) {
+            return Optional.empty();
+        }
+    }
+
     public List<Video> videos(String channel) {
         Optional<VideosResponse> responseWrapper = null;
         try {
