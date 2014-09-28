@@ -71,7 +71,8 @@ public class UserResourceTest {
 
     @Test
     public void getPublicUnexistingUser(){
-
+        userResource = new UserResource().url("https://api.twitch.tv/kraken");
+        assertThat(userResource.user("non_existing_user_xxxx").isPresent()).isFalse();
     }
 
 }
