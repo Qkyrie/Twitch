@@ -75,7 +75,6 @@ public class GamesResourceTest {
 
 
     private void validateGame(Game game) {
-        assertThat(game.getGiantbombId()).isGreaterThan(0);
         assertThat(game.getId()).isGreaterThan(0);
     }
 }
