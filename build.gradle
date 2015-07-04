@@ -1,55 +1,117 @@
-apply plugin: 'signing'
-apply plugin: 'maven'
-
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'maven'
-    apply plugin: 'signing'
-    sourceCompatibility = 1.8
-
-    version = '1.0.0-SNAPSHOT'
-    group = 'com.de-swaef.twitch'
-
+buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
+        maven { url "http://repo.spring.io/release" }
     }
+}
 
-    dependencies {
-        compile("org.springframework:spring-web:4.0.6.RELEASE")
-        compile("com.fasterxml.jackson.core:jackson-databind:2.4.2.RELEASE")
-        testCompile('junit:junit:4.11')
-        testCompile('org.easytesting:fest-assert:1.4')
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'signing'
+apply plugin: 'checkstyle'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+group = 'com.de-swaef.twitch'
+
+jar {
+    baseName = 'Twitch-API'
+    version =  '1.1.0-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile('junit:junit:4.11')
+    testCompile('org.easytesting:fest-assert:1.4')
+    testCompile('net.vidageek:mirror:1.6.1')
+    testCompile 'org.mockito:mockito-all:1.8.4'
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
     }
+}
 
-    task "forceTest" {
-        dependsOn "clean", "cleanTest", "test"
-    }
+task "forceTest" {
+    dependsOn "clean", "cleanTest", "test"
+}
 
-    task "fullBuild" {
-        dependsOn "clean", "cleanTest", "test", "check", "build"
-    }
+task "fullBuild" {
+    dependsOn "clean", "cleanTest", "test", "check", "build"
+}
 
-    task javadocJar(type: Jar) {
-        classifier = 'javadoc'
-        from javadoc
-    }
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
 
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
 
-    artifacts {
-        archives javadocJar, sourcesJar
-    }
+artifacts {
+    archives javadocJar, sourcesJar
+}
 
-    signing {
-        sign configurations.archives
-    }
+signing {
+    sign configurations.archives
+}
 
-    task wrapper(type: Wrapper) {
-        gradleVersion = '1.11'
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Twitch-API'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'The API for accessing Twitch'
+                url 'https://github.com/Qkyrie/Twitch'
+
+                scm {
+                    connection 'https://github.com/Qkyrie/Twitch.git'
+                    developerConnection 'https://github.com/Qkyrie/Twitch.git'
+                    url 'https://github.com/Qkyrie/Twitch.git'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU AFFERO GENERAL PUBLIC LICENSE'
+                        url 'http://www.gnu.org/licenses/agpl.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'Qkyrie'
+                        name 'Quinten De Swaef'
+                        email 'quintendeswaef@gmail.com'
+                    }
+                }
+            }
+        }
     }
 }
 
