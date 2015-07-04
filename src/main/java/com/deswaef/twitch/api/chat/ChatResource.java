@@ -1,11 +1,10 @@
 package com.deswaef.twitch.api.chat;
 
-import com.deswaef.twitch.api.APIResource;
 import com.deswaef.twitch.api.chat.domain.ChatEmoticon;
 import com.deswaef.twitch.api.chat.domain.ChatEmoticonsInformation;
 import com.deswaef.twitch.api.chat.domain.ChatInformation;
 import com.deswaef.twitch.api.chat.domain.ChatLinksInformation;
-import com.deswaef.twitch.rest.RestTemplateProvider;
+import retrofit.RestAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,20 +18,19 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class ChatResource extends APIResource {
-    private String baseUrl;
+public class ChatResource {
+
+    private ChatService chatService;
+
 
     public ChatResource() {
         super();
     }
 
-    public ChatResource(RestTemplateProvider rtProvider) {
-        super(rtProvider);
-    }
 
     public Optional<ChatLinksInformation> chatUser(String chatUser) {
         try {
-            return Optional.ofNullable(rest().getForObject(baseUrl + "/chat/" + chatUser, ChatInformation.class).getChatLinksInformation());
+            return Optional.ofNullable(chatService.chatUser(chatUser).getChatLinksInformation());
         } catch (Exception ex) {
             return Optional.empty();
         }
@@ -40,8 +38,8 @@ public class ChatResource extends APIResource {
 
     public List<ChatEmoticon> emoticons(String chatUser) {
         try {
-            ChatEmoticonsInformation forObject = rest().getForObject(String.format("%s/chat/%s/emoticons", baseUrl, chatUser), ChatEmoticonsInformation.class);
-            if(forObject != null && forObject.getEmoticons() != null) {
+            ChatEmoticonsInformation forObject = chatService.emoticons(chatUser);
+            if (forObject != null && forObject.getEmoticons() != null) {
                 return Collections.unmodifiableList(forObject.getEmoticons());
             } else {
                 return new ArrayList<>();
@@ -51,8 +49,8 @@ public class ChatResource extends APIResource {
         }
     }
 
-    public ChatResource url(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public ChatResource url(RestAdapter restAdapter) {
+        this.chatService = restAdapter.create(ChatService.class);
         return this;
     }
 }

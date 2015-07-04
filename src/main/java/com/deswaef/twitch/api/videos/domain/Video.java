@@ -1,7 +1,6 @@
 package com.deswaef.twitch.api.videos.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
@@ -12,20 +11,19 @@ import java.util.Date;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Video {
     private String title;
     private String description;
-    @JsonProperty("broadcast_id")
+    @SerializedName("broadcast_id")
     private Long broadcastId;
-    @JsonProperty("_id")
+    @SerializedName("_id")
     private String id;
     private Long length;
     private String preview;
     private String url;
     private Long views;
     private String game;
-    @JsonProperty("recorded_at")
+    @SerializedName("recorded_at")
     private Date recordedAt;
 
     public String getTitle() {

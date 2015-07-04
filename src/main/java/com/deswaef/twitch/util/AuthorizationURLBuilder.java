@@ -1,9 +1,7 @@
 package com.deswaef.twitch.util;
 
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
-import static org.springframework.util.Assert.state;
+import static com.deswaef.twitch.exception.States.state;
 
 /**
  * User: Quinten

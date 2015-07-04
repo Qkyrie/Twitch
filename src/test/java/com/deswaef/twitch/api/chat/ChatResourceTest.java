@@ -3,18 +3,29 @@ package com.deswaef.twitch.api.chat;
 import com.deswaef.twitch.api.chat.domain.ChatLinksInformation;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import retrofit.RestAdapter;
 
 import java.util.Optional;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 public class ChatResourceTest {
 
     private ChatResource resource;
 
+    private RestAdapter restAdapter;
+
+    @Mock
+    private ChatService chatService;
+
     @Before
-    public void init(){
-        resource = new ChatResource().url("https://api.twitch.tv/kraken");
+    public void init() {
+        restAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.twitch.tv/kraken")
+                .build();
+        resource = new ChatResource().url(restAdapter);
     }
 
     @Test

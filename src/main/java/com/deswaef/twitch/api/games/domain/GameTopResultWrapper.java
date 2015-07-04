@@ -1,7 +1,6 @@
 package com.deswaef.twitch.api.games.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -12,10 +11,9 @@ import java.util.List;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class GameTopResultWrapper {
 
-    @JsonProperty("_total")
+    @SerializedName("_total")
     private Long total;
 
     public Long getTotal() {
@@ -26,7 +24,7 @@ public class GameTopResultWrapper {
         this.total = total;
     }
 
-    @JsonProperty("top")
+    @SerializedName("top")
     private List<GameTopResult> top;
 
     public List<GameTopResult> getTop() {

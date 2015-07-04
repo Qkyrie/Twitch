@@ -1,7 +1,5 @@
 package com.deswaef.twitch.api.chat.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.List;
 
 /**
@@ -11,7 +9,6 @@ import java.util.List;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatEmoticonsInformation {
 
     private List<ChatEmoticon> emoticons;

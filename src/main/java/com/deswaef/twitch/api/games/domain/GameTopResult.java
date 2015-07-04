@@ -1,7 +1,5 @@
 package com.deswaef.twitch.api.games.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
  * User: Quinten
  * Date: 24-9-2014
@@ -9,13 +7,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class GameTopResult {
 
     private Game game;
     private Long viewers;
     private Long channels;
-
 
 
     public Long getViewers() {

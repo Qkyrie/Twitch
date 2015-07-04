@@ -1,7 +1,7 @@
 package com.deswaef.twitch.api.channels.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
@@ -12,18 +12,17 @@ import java.util.Date;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class TwitchChannel {
-    @JsonProperty("_id")
+    @SerializedName("_id")
     private Long id;
     private String name;
     private String status;
     private String display_name;
     private String game;
     private int delay;
-    @JsonProperty("created_at")
+    @SerializedName("created_at")
     private Date createdAt;
-    @JsonProperty("updated_at")
+    @SerializedName("updated_at")
     private Date updatedAt;
     private String url;
 

@@ -3,6 +3,7 @@ package com.deswaef.twitch.api.ingests;
 import com.deswaef.twitch.api.ingests.domain.Ingest;
 import org.junit.Before;
 import org.junit.Test;
+import retrofit.RestAdapter;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -10,9 +11,14 @@ public class IngestsResourceTest {
 
     private IngestsResource ingestsResource;
 
+    private RestAdapter restAdapter;
+
     @Before
     public void init() {
-        ingestsResource = new IngestsResource().url("https://api.twitch.tv/kraken");
+        restAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.twitch.tv/kraken")
+                .build();
+        ingestsResource = new IngestsResource().url(restAdapter);
     }
 
     @Test

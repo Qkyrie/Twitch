@@ -1,10 +1,8 @@
 package com.deswaef.twitch.api.user;
 
-import com.deswaef.twitch.api.APIResource;
 import com.deswaef.twitch.api.user.domain.User;
 import com.deswaef.twitch.exception.UnAuthorizedException;
-import com.deswaef.twitch.rest.RestTemplateProvider;
-import org.springframework.web.client.HttpClientErrorException;
+import retrofit.RestAdapter;
 
 import java.util.Optional;
 
@@ -15,20 +13,13 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class UserResource extends APIResource {
-    private String baseUrl;
+public class UserResource {
 
-    public UserResource() {
-        super();
-    }
-
-    public UserResource(RestTemplateProvider rtProvider) {
-        super(rtProvider);
-    }
+    private UserService userService;
 
     public Optional<User> user(String user) {
         try {
-            return Optional.ofNullable(rest().getForObject(String.format("%s/users/%s", baseUrl, user), User.class));
+            return Optional.ofNullable(userService.user(user));
         } catch (Exception ex) {
             return Optional.empty();
         }
@@ -36,18 +27,15 @@ public class UserResource extends APIResource {
 
     public Optional<User> getAuthenticatedUser(String accessToken) throws UnAuthorizedException{
         try {
-            return Optional.ofNullable(rest().getForObject(getUrlForAuthenticatedUser(accessToken), User.class));
-        } catch (HttpClientErrorException ex) {
+            return Optional.ofNullable(userService.authenticatedUser(accessToken));
+        } catch (Exception ex) {
             throw new UnAuthorizedException();
         }
     }
 
-    private String getUrlForAuthenticatedUser(String accessToken) {
-        return baseUrl + "/user?oauth_token="+accessToken;
-    }
 
-    public UserResource url(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public UserResource url(RestAdapter restAdapter) {
+        this.userService = restAdapter.create(UserService.class);
         return this;
     }
 }

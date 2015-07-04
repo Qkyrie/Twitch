@@ -3,8 +3,8 @@ package com.deswaef.twitch.configuration;
 import com.deswaef.twitch.api.channels.ChannelResource;
 import com.deswaef.twitch.api.oauth.AccessTokenResource;
 import com.deswaef.twitch.api.user.UserResource;
-import com.deswaef.twitch.rest.RestTemplateProvider;
 import com.deswaef.twitch.api.streams.StreamResource;
+import retrofit.RestAdapter;
 
 public class Twitch {
 
@@ -14,6 +14,7 @@ public class Twitch {
     private UserResource userResource;
 
     private String url;
+    private RestAdapter restAdapter;
 
     private Twitch() {}
 
@@ -23,21 +24,27 @@ public class Twitch {
             String clientSecret,
             String redirectUrl
     ) {
-        RestTemplateProvider provider = new RestTemplateProvider();
         return new Twitch()
-                .url(baseUrl)
-                .streams(new StreamResource(provider))
-                .channels(new ChannelResource(provider))
-                .accessTokens(new AccessTokenResource(provider)
+                .url(createRestAdaptor(baseUrl))
+                .streams(new StreamResource())
+                .channels(new ChannelResource())
+                .accessTokens(new AccessTokenResource()
                         .setClientId(clientId)
                         .setClientSecret(clientSecret)
                         .setRedirectUrl(redirectUrl))
-                .user(new UserResource(provider))
-                ;
+                .user(new UserResource());
+    }
+
+    private static RestAdapter createRestAdaptor(String baseUrl) {
+        return new RestAdapter
+                .Builder()
+                .setEndpoint(baseUrl)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
     }
 
     private Twitch accessTokens(AccessTokenResource accessTokenResource) {
-        this.accessTokenResource = accessTokenResource.setBaseUrl(url);
+        this.accessTokenResource = accessTokenResource.setBaseUrl(restAdapter);
         return this;
     }
 
@@ -55,22 +62,22 @@ public class Twitch {
     }
 
     public Twitch streams(StreamResource streamResource) {
-        this.streams = streamResource.url(this.url);
+        this.streams = streamResource.url(restAdapter);
         return this;
     }
 
     public Twitch channels(ChannelResource channelResource) {
-        this.channels = channelResource.url(this.url);
+        this.channels = channelResource.url(restAdapter);
         return this;
     }
 
     public Twitch user(UserResource userResource) {
-        this.userResource = userResource.url(this.url);
+        this.userResource = userResource.url(restAdapter);
         return this;
     }
 
-    public Twitch url(String url) {
-        this.url = url;
+    public Twitch url(RestAdapter restAdapter) {
+        this.restAdapter = restAdapter;
         return this;
     }
 }

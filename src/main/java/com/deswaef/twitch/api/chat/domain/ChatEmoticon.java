@@ -1,7 +1,7 @@
 package com.deswaef.twitch.api.chat.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * User: Quinten
@@ -10,12 +10,56 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatEmoticon {
     private String regex;
     private String url;
     private Long height;
     private Long width;
-    @JsonProperty("subscriber_only")
+    @SerializedName("subscriber_only")
     private boolean subscriberOnly;
+
+    public String getRegex() {
+        return regex;
+    }
+
+    public ChatEmoticon setRegex(String regex) {
+        this.regex = regex;
+        return this;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public ChatEmoticon setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public Long getHeight() {
+        return height;
+    }
+
+    public ChatEmoticon setHeight(Long height) {
+        this.height = height;
+        return this;
+    }
+
+    public Long getWidth() {
+        return width;
+    }
+
+    public ChatEmoticon setWidth(Long width) {
+        this.width = width;
+        return this;
+    }
+
+    public boolean isSubscriberOnly() {
+        return subscriberOnly;
+    }
+
+    public ChatEmoticon setSubscriberOnly(boolean subscriberOnly) {
+        this.subscriberOnly = subscriberOnly;
+        return this;
+    }
 }

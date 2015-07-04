@@ -1,8 +1,8 @@
 package com.deswaef.twitch.api.ingests;
 
-import com.deswaef.twitch.api.APIResource;
 import com.deswaef.twitch.api.ingests.domain.Ingest;
 import com.deswaef.twitch.api.ingests.domain.IngestResult;
+import retrofit.RestAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,19 +14,25 @@ import java.util.List;
  *
  * @author Quinten De Swaef
  */
-public class IngestsResource extends APIResource {
-    private String baseUrl;
+public class IngestsResource {
+
+    private IngestsService ingestsService;
 
     public List<Ingest> ingests() {
         try {
-            return rest().getForObject(String.format("%s/ingests", baseUrl), IngestResult.class).getIngests();
+            IngestResult ingests = ingestsService.ingests();
+            if (ingests !=  null) {
+                return ingests.getIngests();
+            } else {
+                return new ArrayList<>();
+            }
         } catch (Exception ex) {
             return new ArrayList<>();
         }
     }
 
-    public IngestsResource url(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public IngestsResource url(RestAdapter restAdapter) {
+        this.ingestsService = restAdapter.create(IngestsService.class);
         return this;
     }
 }

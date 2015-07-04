@@ -1,28 +1,26 @@
 package com.deswaef.twitch.api.streams;
 
-import com.deswaef.twitch.api.streams.StreamResource;
 import org.junit.Before;
 import org.junit.Test;
+import retrofit.RestAdapter;
 
-import static com.deswaef.twitch.util.ThrowableAssertion.assertThrown;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class StreamResourceTest {
     private StreamResource streamResource;
 
+    private RestAdapter restAdapter;
+
     @Before
     public void init() {
-        streamResource = new StreamResource();
-    }
-
-    @Test
-    public void whenStreamsAndBaseUrlNullThrowsError() {
-        assertThrown(() -> streamResource.streams()).isInstanceOf(IllegalArgumentException.class);
+        restAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.twitch.tv/kraken")
+                .build();
+        streamResource = new StreamResource().url(restAdapter);
     }
 
     @Test
     public void whenStreamsThenReturnsTop25() {
-        streamResource.url("https://api.twitch.tv/kraken");
         assertThat(streamResource.streams().stream().count()).isEqualTo(25);
     }
 }

@@ -5,6 +5,7 @@ import net.vidageek.mirror.dsl.Mirror;
 import org.junit.Before;
 import org.junit.Test;
 import org.omg.PortableInterceptor.NON_EXISTENT;
+import retrofit.RestAdapter;
 
 import java.util.Optional;
 
@@ -18,14 +19,19 @@ public class VideoResourceTest {
     public static final String EXISTING_VIDEO_ID = "c2990387";
     private VideoResource videoResource;
 
+    private RestAdapter restAdapter;
+
     @Before
     public void init() {
-        videoResource = new VideoResource().url(API_URL);
+        restAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.twitch.tv/kraken")
+                .build();
+        videoResource = new VideoResource().url(restAdapter);
     }
 
     @Test
     public void initializedAndUrlIsSet() {
-        assertThat(new Mirror().on(videoResource).get().field("baseUrl")).isEqualTo(API_URL);
+        assertThat(new Mirror().on(videoResource).get().field("videoService")).isNotNull();
     }
 
     @Test

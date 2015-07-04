@@ -1,9 +1,8 @@
 package com.deswaef.twitch.api.channels;
 
-import com.deswaef.twitch.api.APIResource;
 import com.deswaef.twitch.api.channels.domain.TwitchChannel;
-import com.deswaef.twitch.rest.RestTemplateProvider;
-import org.springframework.util.Assert;
+import com.deswaef.twitch.exception.Assert;
+import retrofit.RestAdapter;
 
 import java.util.Optional;
 
@@ -14,30 +13,22 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class ChannelResource extends APIResource {
+public class ChannelResource {
 
-    private String baseUrl;
+    private ChannelService channelService;
 
-    public ChannelResource() {
-        super();
-    }
-
-    public ChannelResource(RestTemplateProvider rtProvider) {
-        super(rtProvider);
-    }
 
     public Optional<TwitchChannel> channel(String channelName) {
-        Assert.notNull(baseUrl, "base url for twitch must be set");
+        Assert.notNull(channelName, "please enter a channelname");
         try {
-            return Optional.ofNullable(rest().getForObject(String.format("%s/channels/%s", baseUrl, channelName.toLowerCase()), TwitchChannel.class));
+            return Optional.ofNullable(channelService.channel(channelName));
         } catch (Exception ex) {
             return Optional.empty();
         }
     }
 
-    public ChannelResource url(String url)
-    {
-        this.baseUrl = url;
+    public ChannelResource url(RestAdapter url) {
+        this.channelService = url.create(ChannelService.class);
         return this;
     }
 

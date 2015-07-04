@@ -27,6 +27,7 @@ repositories {
 }
 
 dependencies {
+    compile('com.squareup.retrofit:retrofit:1.9.0')
     testCompile('junit:junit:4.11')
     testCompile('org.easytesting:fest-assert:1.4')
     testCompile('net.vidageek:mirror:1.6.1')

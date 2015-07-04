@@ -1,7 +1,6 @@
 package com.deswaef.twitch.api.ingests.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * User: Quinten
@@ -10,15 +9,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Ingest {
     private String name;
     private Integer availability;
-    @JsonProperty("_id")
+    @SerializedName("_id")
     private Long id;
-    @JsonProperty("default")
+    @SerializedName("default")
     private Boolean byDefault;
-    @JsonProperty("url_template")
+    @SerializedName("url_template")
     private String urlTemplate;
 
     public String getName() {

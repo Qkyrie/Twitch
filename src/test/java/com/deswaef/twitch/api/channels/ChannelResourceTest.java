@@ -1,11 +1,11 @@
 package com.deswaef.twitch.api.channels;
 
 
-import com.deswaef.twitch.api.channels.ChannelResource;
 import com.deswaef.twitch.api.channels.domain.TwitchChannel;
 import net.vidageek.mirror.dsl.Mirror;
 import org.junit.Before;
 import org.junit.Test;
+import retrofit.RestAdapter;
 
 import java.util.Optional;
 
@@ -16,28 +16,24 @@ public class ChannelResourceTest {
     public static final String BASE_URL = "BASE_URL";
     private ChannelResource channelResource;
 
+    private RestAdapter restAdapter;
+
     @Before
     public void init(){
-        channelResource = new ChannelResource();
+        restAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.twitch.tv/kraken")
+                .build();
+        channelResource = new ChannelResource().url(restAdapter);
     }
 
     @Test
     public void initializedAndUrlIsSet() {
-        channelResource.url(BASE_URL);
-        assertThat(new Mirror().on(channelResource).get().field("baseUrl")).isEqualTo(BASE_URL);
-    }
-
-    @Test
-    public void channelAndNoBaseUrlSet() {
-        assertThrown(
-                () -> channelResource.channel("streamingforanimals")
-        ).isInstanceOf(IllegalArgumentException.class);
+        assertThat(new Mirror().on(channelResource).get().field("channelService")).isNotNull();
     }
 
     @Test
     public void verifyExistingChannel(){
-        final ChannelResource newChannelResource = channelResource.url("https://api.twitch.tv/kraken");
-        Optional<TwitchChannel> streamingforanimals = newChannelResource.channel("streamingforanimals");
+        Optional<TwitchChannel> streamingforanimals = channelResource.channel("streamingforanimals");
         assertThat(streamingforanimals.isPresent())
                 .isTrue();
     }
@@ -45,8 +41,7 @@ public class ChannelResourceTest {
 
     @Test
     public void verifyChannelHasCorrectFields(){
-        final ChannelResource newChannelResource = channelResource.url("https://api.twitch.tv/kraken");
-        Optional<TwitchChannel> streamingforanimals = newChannelResource.channel("streamingforanimals");
+        Optional<TwitchChannel> streamingforanimals = channelResource.channel("streamingforanimals");
         assertThat(streamingforanimals.get().getDisplay_name()).isEqualTo("StreamingForAnimals");
         assertThat(streamingforanimals.get().getStatus()).isNotEmpty();
         assertThat(streamingforanimals.get().getCreatedAt()).isNotNull();
@@ -57,8 +52,7 @@ public class ChannelResourceTest {
 
     @Test
     public void verifyUnexistingChannel(){
-        final ChannelResource newChannelResource = channelResource.url("https://api.twitch.tv/kraken");
-        assertThat(newChannelResource.channel(String.format("thisoneshouldnotexist_xxx_%s", System.currentTimeMillis())).isPresent())
+        assertThat(channelResource.channel(String.format("thisoneshouldnotexist_xxx_%s", System.currentTimeMillis())).isPresent())
                 .isFalse();
     }
 

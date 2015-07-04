@@ -1,8 +1,8 @@
 package com.deswaef.twitch.api.videos;
 
-import com.deswaef.twitch.api.APIResource;
 import com.deswaef.twitch.api.videos.domain.Video;
 import com.deswaef.twitch.api.videos.domain.VideosResponse;
+import retrofit.RestAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +15,13 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class VideoResource extends APIResource {
+public class VideoResource {
 
-    private String baseUrl;
+    private VideoService videoService;
 
     public Optional<Video> video(String id) {
         try {
-            return Optional.ofNullable(rest().getForObject(String.format("%s/videos/%s", baseUrl, id), Video.class));
+            return Optional.ofNullable(videoService.video(id));
         } catch (Exception ex) {
             return Optional.empty();
         }
@@ -30,7 +30,7 @@ public class VideoResource extends APIResource {
     public List<Video> videos(String channel) {
         Optional<VideosResponse> responseWrapper = null;
         try {
-            responseWrapper = Optional.of(rest().getForObject(String.format("%s/channels/%s/videos", baseUrl, channel), VideosResponse.class));
+            responseWrapper = Optional.ofNullable(videoService.videos(channel));
         } catch (Exception excepton) {
             responseWrapper = Optional.empty();
         }
@@ -42,8 +42,8 @@ public class VideoResource extends APIResource {
         }
     }
 
-    public VideoResource url(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public VideoResource url(RestAdapter restAdapter) {
+        this.videoService = restAdapter.create(VideoService.class);
         return this;
     }
 

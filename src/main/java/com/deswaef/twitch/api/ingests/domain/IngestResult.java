@@ -1,6 +1,5 @@
 package com.deswaef.twitch.api.ingests.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
@@ -11,7 +10,6 @@ import java.util.List;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class IngestResult {
     private List<Ingest> ingests;
 

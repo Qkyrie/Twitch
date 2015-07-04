@@ -1,7 +1,6 @@
 package com.deswaef.twitch.api.user.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
@@ -12,19 +11,18 @@ import java.util.Date;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private String name;
-    @JsonProperty(value = "created_at")
+    @SerializedName(value = "created_at")
     private Date createdAt;
-    @JsonProperty(value = "updated_at")
+    @SerializedName(value = "updated_at")
     private Date updatedAt;
     private String logo;
-    @JsonProperty(value = "_id")
+    @SerializedName(value = "_id")
     private Long id;
     private String email;
-    @JsonProperty("display_name")
+    @SerializedName("display_name")
     private String displayName;
     private boolean partnered;
 

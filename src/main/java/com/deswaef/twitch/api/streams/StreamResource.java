@@ -1,13 +1,11 @@
 package com.deswaef.twitch.api.streams;
 
-import com.deswaef.twitch.api.APIResource;
 import com.deswaef.twitch.api.streams.domain.StreamCheck;
-import com.deswaef.twitch.api.streams.domain.Streams;
 import com.deswaef.twitch.api.streams.domain.TwitchStream;
-import com.deswaef.twitch.rest.RestTemplateProvider;
-import org.springframework.util.Assert;
-import org.springframework.web.client.HttpClientErrorException;
+import com.deswaef.twitch.exception.Assert;
+import retrofit.RestAdapter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -19,16 +17,9 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class StreamResource extends APIResource {
-    private String baseUrl;
+public class StreamResource  {
 
-    public StreamResource() {
-        super();
-    }
-
-    public StreamResource(RestTemplateProvider provider) {
-        super(provider);
-    }
+    private StreamService streamService;
 
     /**
      * returns a list of the current top streams
@@ -36,14 +27,13 @@ public class StreamResource extends APIResource {
      * @return List of TwitchStream
      */
     public List<TwitchStream> streams() {
-        Assert.notNull(baseUrl, "base url for twitch must be set");
-        return Arrays.asList(
-                rest().getForObject
-                        (
-                            String.format("%s/streams", baseUrl),
-                            Streams.class
-                        )
-                        .getStreams());
+        try {
+            return Arrays.asList(
+                    streamService.streams()
+                            .getStreams());
+        } catch (Exception ex) {
+            return new ArrayList<>();
+        }
     }
 
     /**
@@ -55,16 +45,16 @@ public class StreamResource extends APIResource {
      * @return Optional of StreamCheck
      */
     public Optional<StreamCheck> stream(String stream) {
-        Assert.notNull(baseUrl, "base url for twitch must be set");
+        Assert.notNull(stream, "url for stream must not be null");
         try {
-            return Optional.of(rest().getForObject(String.format("%s/streams/%s", baseUrl, stream), StreamCheck.class));
-        } catch (HttpClientErrorException exception) {
+            return Optional.of(streamService.stream(stream));
+        } catch (Exception exception) {
             return Optional.empty();
         }
     }
 
-    public StreamResource url(String url) {
-        this.baseUrl = url;
+    public StreamResource url(RestAdapter restAdapter) {
+        this.streamService = restAdapter.create(StreamService.class);
         return this;
     }
 

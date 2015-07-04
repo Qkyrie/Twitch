@@ -23,26 +23,6 @@ public class TwitchTest {
         twitch = Twitch.newTwitchInstance(BASE_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
     }
 
-    @Test
-    public void newHasValidStreamsConfiguration() {
-        assertThat(
-                new Mirror().on(twitch.streams()).get().field("baseUrl")
-        ).isNotNull();
-    }
-
-    @Test
-    public void newHasValidChannelsConfiguration(){
-        assertThat(
-                new Mirror().on(twitch.channels()).get().field("baseUrl")
-        ).isNotNull();
-    }
-
-    @Test
-    public void newHasValidAccessTokenConfiguration(){
-        assertThat(
-                    new Mirror().on(twitch.accessTokens()).get().field("baseUrl")
-                ).isNotNull();
-    }
 
     @Test
     public void newHasValidAccessTokenRequestTemplate(){

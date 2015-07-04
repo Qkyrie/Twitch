@@ -1,7 +1,5 @@
 package com.deswaef.twitch.api.streams.domain;
 
-import com.deswaef.twitch.api.streams.domain.TwitchStream;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * User: Quinten
@@ -10,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class StreamCheck {
 
     private TwitchStream stream;

@@ -3,12 +3,7 @@ package com.deswaef.twitch.api.oauth;
 
 import com.deswaef.twitch.api.oauth.domain.AccessTokenRequest;
 import com.deswaef.twitch.api.oauth.domain.AccessTokenResponse;
-import com.deswaef.twitch.rest.RestTemplateProvider;
-import com.deswaef.twitch.api.APIResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import retrofit.RestAdapter;
 
 /**
  * User: Quinten
@@ -17,10 +12,9 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Quinten De Swaef
  */
-public class AccessTokenResource extends APIResource {
+public class AccessTokenResource {
 
-    private String oauthTokenUrl = "/oauth2/token";
-    private String baseUrl;
+    private AccessTokenService accessTokenService;
 
     private AccessTokenRequest requestTemplate;
 
@@ -29,32 +23,12 @@ public class AccessTokenResource extends APIResource {
         requestTemplate = new AccessTokenRequest();
     }
 
-    public AccessTokenResource(RestTemplateProvider rtProvider) {
-        super(rtProvider);
-        requestTemplate = new AccessTokenRequest();
-    }
-
     public AccessTokenResponse requestToken(String accessCode) {
-        RestTemplate rest = rest();
-        rest.getMessageConverters().add(new StringHttpMessageConverter());
         try {
-            return rest.postForObject(
-                    baseUrl + oauthTokenUrl,
-                    requestTemplate.copy(accessCode),
-                    AccessTokenResponse.class);
-        } catch (HttpClientErrorException badRequestException) {
-            if(badRequestException.getStatusCode().equals(HttpStatus.FORBIDDEN)) {
-                return AccessTokenResponse.forbidden();
-            }
-            return AccessTokenResponse.invalid_code();
+            return accessTokenService.requestToken(requestTemplate.copy(accessCode));
         } catch(Exception ex) {
             return AccessTokenResponse.unknown_issue();
         }
-    }
-
-    public AccessTokenResource setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-        return this;
     }
 
     public AccessTokenResource setClientId(String clientId) {
@@ -68,9 +42,13 @@ public class AccessTokenResource extends APIResource {
         return this;
     }
 
-
     public AccessTokenResource setRedirectUrl(String redirectUrl) {
         this.requestTemplate.setRedirect_uri(redirectUrl);
+        return this;
+    }
+
+    public AccessTokenResource setBaseUrl(RestAdapter restAdaptor) {
+        this.accessTokenService = restAdaptor.create(AccessTokenService.class);
         return this;
     }
 }

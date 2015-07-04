@@ -1,7 +1,7 @@
 package com.deswaef.twitch.api.games;
 
-import com.deswaef.twitch.api.APIResource;
 import com.deswaef.twitch.api.games.domain.GameTopResultWrapper;
+import retrofit.RestAdapter;
 
 import java.util.Optional;
 
@@ -12,21 +12,20 @@ import java.util.Optional;
  *
  * @author Quinten De Swaef
  */
-public class GamesResource extends APIResource {
+public class GamesResource  {
 
-    private String baseUrl;
+    private GamesService gamesService;
 
     public Optional<GameTopResultWrapper> top() {
         try {
-            GameTopResultWrapper forObject = rest().getForObject(baseUrl + "/games/top", GameTopResultWrapper.class);
-            return Optional.of(forObject);
+            return Optional.ofNullable(gamesService.top());
         } catch (Exception ex) {
             return Optional.empty();
         }
     }
 
-    public GamesResource url(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public GamesResource url(RestAdapter restAdapter) {
+        this.gamesService = restAdapter.create(GamesService.class);
         return this;
     }
 

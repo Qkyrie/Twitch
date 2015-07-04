@@ -1,9 +1,6 @@
 package com.deswaef.twitch.api.games.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * User: Quinten
@@ -12,16 +9,15 @@ import java.util.List;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Game {
 
-    @JsonProperty("_id")
+    @SerializedName("_id")
     private Long id;
-    @JsonProperty("giantbomb_id")
+    @SerializedName("giantbomb_id")
     private Long giantbombId;
-    @JsonProperty("box")
+    @SerializedName("box")
     private GameImage box;
-    @JsonProperty("logo")
+    @SerializedName("logo")
     private GameImage logo;
 
     public Long getId() {

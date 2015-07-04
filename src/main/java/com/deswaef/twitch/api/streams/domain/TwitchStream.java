@@ -1,7 +1,6 @@
 package com.deswaef.twitch.api.streams.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * User: Quinten
@@ -10,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author Quinten De Swaef
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class TwitchStream {
 
-    @JsonProperty(value = "_id")
+    @SerializedName(value = "_id")
     private Long id;
 
     private String game;
